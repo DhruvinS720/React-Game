@@ -1,0 +1,71 @@
+import React from "react";
+import { useState, useEffect } from "react";
+
+export default function Tictac() {
+  const [count, setcount] = useState(true);
+  const [cnt, setcnt] = useState(0);
+  const [win, setwin] = useState("");
+  const [inputs, setInputs] = useState([-1, -1, -1, -1, -1, -1, -1, -1, -1]);
+  const i = (e) => {
+    if (inputs[e] === -1) {
+      let tempInputs = inputs;
+      tempInputs[e] = count ? "X" : "O";
+      setInputs(tempInputs);
+      setcount(!count);
+      setcnt(cnt + 1);
+    }
+  };
+
+  // useEffect(() => {
+  //   const win = () => {
+  //     for (i = 0; i < 9; i += 3) {
+  //       if (
+  //         count[i] == count[i + 1] &&
+  //         count[i] == count[i + 2] &&
+  //         count != ""
+  //       ) {
+  //         console.log("win");
+  //       } else if (
+  //         count[i] == count[i + 3] &&
+  //         count[i] == count[0 + 6] &&
+  //         count != ""
+  //       ) {
+  //         console.log("win");
+  //       }
+  //     }
+  //   };
+  // }, []);
+
+  // else if(
+  //   (a == "O" && b == "O" && c == "O") ||
+  //   (a == "O" && e == "O" && j == "O") ||
+  //   (a == "O" && d == "O" && g == "O") ||
+  //   (b == "O" && e == "O" && h == "O")
+  // )
+  // {
+  //   setwin("player b loss")
+  // }
+  // else{
+  //   setwin("DRAW")
+  // }
+
+  return (
+    <>
+      <h1>{win}</h1>
+      <div id="play-area">
+        {inputs.map((item, index) => (
+          <>
+            <input
+              type="button"
+              className="square"
+              id={`square${index + 1}`}
+              value={item !== -1 ? item : ""}
+              onClick={() => i(index)}
+            />
+            {(index + 1) % 3 === 0 && <br />}
+          </>
+        ))}
+      </div>
+    </>
+  );
+}
